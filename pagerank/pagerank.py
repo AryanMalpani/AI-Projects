@@ -40,10 +40,7 @@ def crawl(directory):
 
     # Only include links to other pages in the corpus
     for filename in pages:
-        pages[filename] = set(
-            link for link in pages[filename]
-            if link in pages
-        )
+        pages[filename] = set(link for link in pages[filename] if link in pages)
 
     return pages
 
@@ -60,10 +57,10 @@ def transition_model(corpus, page, d):
     n = len(corpus)
     ret = {}
     for k in corpus.keys():
-        ret[k] = (1-d)/n
+        ret[k] = (1 - d) / n
 
     for k in corpus[page]:
-        ret[k] += d/len(corpus[page])
+        ret[k] += d / len(corpus[page])
 
     return ret
 
@@ -84,14 +81,12 @@ def sample_pagerank(corpus, d, n):
     ret = {}
     for abcd in range(n):
         if s[0] in ret:
-            ret[s[0]] += 1/n
+            ret[s[0]] += 1 / n
         else:
-            ret[s[0]] = 1/n
+            ret[s[0]] = 1 / n
 
         model = transition_model(corpus, s[0], d)
-        s = random.choices(
-            list(model.keys()), weights=list(model.values()), k=1
-            )
+        s = random.choices(list(model.keys()), weights=list(model.values()), k=1)
 
     return ret
 

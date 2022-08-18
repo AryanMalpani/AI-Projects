@@ -33,18 +33,18 @@ def main():
 
 def monthToNum(shortMonth):
     return {
-            'Jan': 0,
-            'Feb': 1,
-            'Mar': 2,
-            'Apr': 3,
-            'May': 4,
-            'June': 5,
-            'Jul': 6,
-            'Aug': 7,
-            'Sep': 8,
-            'Oct': 9,
-            'Nov': 10,
-            'Dec': 11,
+        "Jan": 0,
+        "Feb": 1,
+        "Mar": 2,
+        "Apr": 3,
+        "May": 4,
+        "June": 5,
+        "Jul": 6,
+        "Aug": 7,
+        "Sep": 8,
+        "Oct": 9,
+        "Nov": 10,
+        "Dec": 11,
     }[shortMonth]
 
 
@@ -81,8 +81,8 @@ def load_data(filename):
     labels = []
     first = True
 
-    with open(filename, newline='') as csvfile:
-        spamreader = csv.reader(csvfile, delimiter=',', quotechar='|')
+    with open(filename, newline="") as csvfile:
+        spamreader = csv.reader(csvfile, delimiter=",", quotechar="|")
         for row in spamreader:
             if first:
                 first = False
@@ -103,10 +103,10 @@ def load_data(filename):
             e.append(int(row[12]))
             e.append(int(row[13]))
             e.append(int(row[14]))
-            e.append(0 if row[15] == 'New_Visitor' else 1)
-            e.append(0 if row[16] == 'FALSE' else 1)
+            e.append(0 if row[15] == "New_Visitor" else 1)
+            e.append(0 if row[16] == "FALSE" else 1)
             evidence.append(e)
-            labels.append(0 if row[17] == 'FALSE' else 1)
+            labels.append(0 if row[17] == "FALSE" else 1)
 
     return evidence, labels
 
@@ -158,7 +158,7 @@ def evaluate(labels, predictions):
             posl += 1
             posp += 1 if label == prediction else 0
 
-    return posp/posl, negp/negl
+    return posp / posl, negp / negl
     raise NotImplementedError
 
 
