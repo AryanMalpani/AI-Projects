@@ -41,7 +41,7 @@ def monthToNum(shortMonth):
             'June': 5,
             'Jul': 6,
             'Aug': 7,
-            'Sep': 8, 
+            'Sep': 8,
             'Oct': 9,
             'Nov': 10,
             'Dec': 11,
@@ -76,7 +76,7 @@ def load_data(filename):
     labels should be the corresponding list of labels, where each label
     is 1 if Revenue is true, and 0 otherwise.
     """
-    
+
     evidence = []
     labels = []
     first = True
@@ -107,7 +107,7 @@ def load_data(filename):
             e.append(0 if row[16] == 'FALSE' else 1)
             evidence.append(e)
             labels.append(0 if row[17] == 'FALSE' else 1)
-    
+
     return evidence, labels
 
     raise NotImplementedError
@@ -121,7 +121,7 @@ def train_model(evidence, labels):
 
     model = KNeighborsClassifier(n_neighbors=1)
     X_training = [e for e in evidence]
-    y_training = [l for l in labels]
+    y_training = [label for label in labels]
     model.fit(X_training, y_training)
 
     return model
@@ -145,18 +145,18 @@ def evaluate(labels, predictions):
     actual negative labels that were accurately identified.
     """
 
-    posl=0
-    posp=0
-    negl=0
-    negp=0
-    for l, p in zip(labels,predictions):
-        if l==0:
+    posl = 0
+    posp = 0
+    negl = 0
+    negp = 0
+    for label, prediction in zip(labels, predictions):
+        if label == 0:
             negl += 1
-            negp += 1 if l==p else 0
-        
-        elif l==1:
+            negp += 1 if label == prediction else 0
+
+        elif label == 1:
             posl += 1
-            posp += 1 if l==p else 0
+            posp += 1 if label == prediction else 0
 
     return posp/posl, negp/negl
     raise NotImplementedError
