@@ -234,7 +234,7 @@ def train(n):
     return player
 
 
-def play(ai, human_player=1):
+def play(ai, human_player=None):
     """
     Play human game against the AI.
     `human_player` can be set to 0 or 1 to specify whether
