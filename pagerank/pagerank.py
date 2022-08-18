@@ -16,7 +16,7 @@ def main():
     for page in sorted(ranks):
         print(f"  {page}: {ranks[page]:.4f}")
     ranks = iterate_pagerank(corpus, DAMPING)
-    print(f"PageRank Results from Iteration")
+    print("PageRank Results from Iteration")
     for page in sorted(ranks):
         print(f"  {page}: {ranks[page]:.4f}")
 
@@ -60,11 +60,10 @@ def transition_model(corpus, page, d):
     n = len(corpus)
     ret = {}
     for k in corpus.keys():
-        ret[k]=(1-d)/n
-    
+        ret[k] = (1-d)/n
+
     for k in corpus[page]:
         ret[k] += d/len(corpus[page])
-
 
     return ret
 
@@ -81,17 +80,19 @@ def sample_pagerank(corpus, d, n):
     PageRank values should sum to 1.
     """
 
-    s = random.choices(list(corpus.keys()),k=1)
+    s = random.choices(list(corpus.keys()), k=1)
     ret = {}
-    for sladkjf in range(n):
-        if(s[0] in ret) :
+    for abcd in range(n):
+        if s[0] in ret:
             ret[s[0]] += 1/n
         else:
             ret[s[0]] = 1/n
 
-        model = transition_model(corpus,s[0],d)
-        s = random.choices(list(model.keys()),weights=list(model.values()),k=1)
-        
+        model = transition_model(corpus, s[0], d)
+        s = random.choices(
+            list(model.keys()), weights=list(model.values()), k=1
+            )
+
     return ret
 
     raise NotImplementedError
@@ -121,7 +122,8 @@ def iterate_pagerank(corpus, damping_factor):
     # then, apply the PageRank formula
     # if change (new_rank, old_rank) < threshold update counter
     # if by the end of the loop, counter == N,
-    # it means that the change in rank for each page in the corpus was within the threshold
+    # it means that the change in rank for each page
+    # in the corpus was within the threshold
     # so end the loop
     # return rank
     while True:
@@ -144,9 +146,9 @@ def iterate_pagerank(corpus, damping_factor):
 
             if abs(ranks[key] - new) < threshold:
                 count += 1
-            
+
             ranks[key] = new
-        
+
         if count == N:
             break
 
