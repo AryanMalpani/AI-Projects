@@ -1,4 +1,4 @@
-from nim import train, play
+from nim import play, train
 
 ai = train(10000)
 play(ai)
