@@ -10,7 +10,7 @@ flake8==5.0.4
 idna==3.3
 isort==5.10.1
 jellyfish==0.9.0
-joblib==1.1.0
+joblib==1.2.0
 lib50==3.0.4
 mccabe==0.7.0
 mypy-extensions==0.4.3
